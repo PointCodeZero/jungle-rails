@@ -21,6 +21,12 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :new, :create]
   end
 
+  # Login form, login and logout
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/login' => 'sessions#destroy'
+
+  # Sign up form, sign up logic
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
 
