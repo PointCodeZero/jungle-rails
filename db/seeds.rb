@@ -151,6 +151,20 @@ u2 = User.create({
   last_name: Faker::Name.last_name
 })
 
+u3 = User.create({
+  email: Faker::Internet.email,
+  password: Faker::Internet.password(8),
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name
+})
+
+u4 = User.create({
+  email: Faker::Internet.email,
+  password: Faker::Internet.password(8),
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name
+})
+
 ## REVIEWS
 
 puts "Finding or Creating Products ..."
