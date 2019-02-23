@@ -83,7 +83,6 @@ cat1.products.create!({
   price: 224.50
 })
 
-
 cat2.products.create!({
   name:  'Modern Skateboards',
   description: Faker::Hipster.paragraph(4),
@@ -130,6 +129,62 @@ cat3.products.create!({
   image: open_asset('furniture3.jpg'),
   quantity: 0,
   price: 2_483.75
+})
+
+## USERS
+
+puts "Re-creating Users ..."
+
+User.destroy_all
+
+u1 = User.create({
+  email: Faker::Internet.email,
+  password: Faker::Internet.password(8),
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name
+})
+
+u2 = User.create({
+  email: Faker::Internet.email,
+  password: Faker::Internet.password(8),
+  first_name: Faker::Name.first_name,
+  last_name: Faker::Name.last_name
+})
+
+## REVIEWS
+
+puts "Finding or Creating Products ..."
+
+prod1 = Product.find_or_create_by! name: 'Hipster Hat'
+prod2 = Product.find_or_create_by! name: 'Electric Chair'
+prod3 = Product.find_or_create_by! name: 'Red Bookshelf'
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+prod1.reviews.create!({
+  user_id: u1.id,
+  description: Faker::Hipster.paragraph(4),
+  rating: 4,
+})
+
+prod1.reviews.create!({
+  user_id: u2.id,
+  description: Faker::Hipster.paragraph(4),
+  rating: 3,
+})
+
+prod2.reviews.create!({
+  user_id: u1.id,
+  description: Faker::Hipster.paragraph(4),
+  rating: 5,
+})
+
+prod3.reviews.create!({
+  user_id: u2.id,
+  description: Faker::Hipster.paragraph(4),
+  rating: 2,
 })
 
 
