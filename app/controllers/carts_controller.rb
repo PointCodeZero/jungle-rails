@@ -3,6 +3,7 @@ class CartsController < ApplicationController
   # before_filter :authorize
 
   def show
+    flash[:danger] = "Please add one of our products before you proceed with a purchase!"
   end
 
   def add_item
