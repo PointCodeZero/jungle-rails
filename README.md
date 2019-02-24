@@ -14,7 +14,9 @@ A mini e-commerce application built with Ruby on Rails 4.2 for purposes of learn
 
 ## Images
 
-<!-- !["Screenshot of chat"](https://github.com/PointCodeZero/Chatty-App/blob/master/docs/chat.jpg?raw=true) -->
+!["Screenshot of main page"](https://github.com/PointCodeZero/jungle-rails/blob/master/docs/index.jpg)
+!["Screenshot of product"](https://github.com/PointCodeZero/jungle-rails/blob/master/docs/product.jpg)
+!["Screenshot of cart"](https://github.com/PointCodeZero/jungle-rails/blob/master/docs/cart.jpg)
 
 ## Functionality
 
