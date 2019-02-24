@@ -3,4 +3,8 @@
   <p><strong>Rating:</strong> <%= review.rating %> / 5</p>
   <p><%= review.created_at.strftime("%B %d, %Y") %></p>
 	<p><%= review.description %></p>
+
+  <% if current_user == review.user %>
+    <%= link_to "Delete", product_review_path(@product.id, review.id), method: :delete, class: "btn btn-danger" %>
+  <% end %>
 </div>
