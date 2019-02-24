@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :find_product
+  before_filter :authorize
 
   def create
     review = Review.new(review_params)
