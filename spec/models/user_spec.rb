@@ -13,6 +13,8 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
 
+    # Name Validation
+
     it "should not be valid without a first_name" do
       user = User.new(
         :first_name => nil,
@@ -35,6 +37,8 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
 
+    # Email Validation
+
     it "should not be valid without an email" do
       user = User.new(
         :first_name => 'Lucas',
@@ -45,6 +49,26 @@ RSpec.describe User, type: :model do
       )
       expect(user).to_not be_valid
     end
+
+    it "should not save without unique email" do
+      user1 = User.create(
+        :first_name => 'Lucas',
+        :last_name => 'Cruz',
+        :email => 'lucas@gmail.com',
+        :password => '12345',
+        :password_confirmation => '12345'
+      )
+      user2 = User.create(
+        :first_name => 'Lucas',
+        :last_name => 'Oliveira',
+        :email => 'Lucas@GMAIL.com',
+        :password => '6789',
+        :password_confirmation => '6789'
+      )
+      expect(user2).to_not be_valid
+    end
+
+    # Password Validation
 
     it "should not be valid without a password" do
       user = User.new(
@@ -70,28 +94,24 @@ RSpec.describe User, type: :model do
 
     it "should have matching password and password confirmation" do
       password = User.create(
+        :first_name => 'Lucas',
+        :last_name => 'Cruz',
+        :email => 'lucas@gmail.com',
         :password => '12345', 
         :password_confirmation => '12346'
         )
       expect(password).to_not be_equal(password.password_confirmation)
     end
 
-    it "should not save without unique email" do
-      user1 = User.create(
+    it "should not be valid password if it's less than 3 characters" do
+      user = User.new(
         :first_name => 'Lucas',
         :last_name => 'Cruz',
         :email => 'lucas@gmail.com',
-        :password => '12345',
-        :password_confirmation => '12345'
+        :password => '12', 
+        :password_confirmation => '12'
       )
-      user2 = User.create(
-        :first_name => 'Lucas',
-        :last_name => 'Oliveira',
-        :email => 'Lucas@GMAIL.com',
-        :password => '6789',
-        :password_confirmation => '6789'
-      )
-      expect(user2).to_not be_valid
+      expect(user).to_not be_valid
     end
     
   end
