@@ -115,4 +115,36 @@ RSpec.describe User, type: :model do
     end
     
   end
+
+  # Login
+
+  describe ".authenticate_with_credentials" do
+
+    it "should be valid if provided password is equal to the user password" do
+      user = User.new(
+        :first_name => 'Andreia',
+        :last_name => 'Cifoni',
+        :email => 'andreia@gmail.com',
+        :password => 'deia', 
+        :password_confirmation => 'deia'
+      )
+      user.save
+      authenticate = User.authenticate_with_credentials('andreia@gmail.com', 'deia')
+      expect(authenticate).to eq(user)
+    end
+
+    it "should not be valid if provided password is not equal to the user password" do
+      user = User.new(
+        :first_name => 'Andreia',
+        :last_name => 'Cifoni',
+        :email => 'andreia@gmail.com',
+        :password => 'deia', 
+        :password_confirmation => 'deia'
+      )
+      user.save
+      authenticate = User.authenticate_with_credentials('andreia@gmail.com', 'deia1')
+      expect(authenticate).to eq(nil)
+    end
+
+  end
 end
