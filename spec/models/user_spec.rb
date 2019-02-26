@@ -116,7 +116,7 @@ RSpec.describe User, type: :model do
     
   end
 
-  # Login
+  # Authenticate
 
   describe ".authenticate_with_credentials" do
 
@@ -144,6 +144,32 @@ RSpec.describe User, type: :model do
       user.save
       authenticate = User.authenticate_with_credentials('andreia@gmail.com', 'deia1')
       expect(authenticate).to eq(nil)
+    end
+
+    it "should be valid if provided email is camel case" do
+      user = User.new(
+        :first_name => 'Andreia',
+        :last_name => 'Cifoni',
+        :email => 'andreia@gmail.com',
+        :password => 'deia', 
+        :password_confirmation => 'deia'
+      )
+      user.save
+      authenticate = User.authenticate_with_credentials('ANDreia@gmail.com', 'deia')
+      expect(authenticate).to eq(user)
+    end
+
+    it "should be valid if provided email has whitespaces as first and last letter" do
+      user = User.new(
+        :first_name => 'Andreia',
+        :last_name => 'Cifoni',
+        :email => 'andreia@gmail.com',
+        :password => 'deia', 
+        :password_confirmation => 'deia'
+      )
+      user.save
+      authenticate = User.authenticate_with_credentials(' andreia@gmail.com ', 'deia')
+      expect(authenticate).to eq(user)
     end
 
   end
